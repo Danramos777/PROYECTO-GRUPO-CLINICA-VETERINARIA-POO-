@@ -59,6 +59,9 @@ public class Main {
                 case 10:
                     consultarHistorial(sc, gestor);
                     break;
+                case 11:
+                    eliminarMascota(sc, gestor);
+                    break;
                 case 0:
                     System.out.println("Gracias por utilizar el sistema.");
                     break;
@@ -242,6 +245,20 @@ public class Main {
             return;
         }
         mascota.mostrarHistorialMascota();
+    }
+
+    private static void eliminarMascota(Scanner sc, GestorClinicaVeterinaria gestor){
+        System.out.println("\n--- ELIMINAR MASCOTA ---");
+        String cedula = leerTexto(sc, "Cedula del propietario: ");
+        Cliente cliente = gestor.buscarCliente(cedula);
+        if(cliente == null){
+            System.out.println("Cliente no encontrado.");
+            return;
+        }
+        int idMascota = leerEntero(sc, "ID de la mascota.");
+        if(cliente.eliminarMascota(idMascota)){
+            System.out.println("Mascota elimianda coorrectamente.");
+        }else System.out.println("Macota no encontrada.");
     }
 
     private static void mostrarInformacion(IGestionable objeto) {
